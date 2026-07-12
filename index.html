@@ -1,533 +1,61 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>LadyGlamProtection — La sécurité au féminin, le style en plus</title>
-<meta name="description" content="LadyGlamProtection — accessoires de protection élégants et discrets pour femmes. Sécurité, style et sérénité au quotidien.">
-<meta property="og:title" content="LadyGlamProtection">
-<meta property="og:description" content="La sécurité au féminin, le style en plus.">
-<meta name="theme-color" content="#211720">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,300;0,500;0,600;1,400;1,500&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-<style>
-  :root{
-    --plum:#211720;
-    --plum-2:#2b1d29;
-    --rose:#E8A0BC;
-    --gold:#C9A455;
-    --gold-light:#E4C989;
-    --ivoire:#FAF3EC;
-    --ink:#2B2129;
-    --ink-soft:#6b5c64;
-    --max-w:1120px;
-    --font-display:'Fraunces', serif;
-    --font-body:'Poppins', sans-serif;
-  }
-  *,*::before,*::after{box-sizing:border-box;}
-  html{scroll-behavior:smooth;}
-  body{
-    margin:0; background:var(--ivoire); color:var(--ink);
-    font-family:var(--font-body); font-weight:400; line-height:1.6;
-    -webkit-font-smoothing:antialiased;
-  }
-  h1,h2,h3{font-family:var(--font-display); margin:0 0 .6em; color:var(--ink); font-weight:600;}
-  p{margin:0 0 1em;}
-  a{color:inherit;}
-  ul{margin:0; padding:0;}
-  button{font-family:var(--font-body); cursor:pointer;}
-  img,svg{display:block; max-width:100%;}
-  .container{max-width:var(--max-w); margin:0 auto; padding:0 1.5rem;}
-  .visually-hidden{position:absolute; width:1px; height:1px; overflow:hidden; clip:rect(0 0 0 0); white-space:nowrap;}
-  :focus-visible{outline:2px solid var(--gold); outline-offset:3px;}
-  .skip-link{position:absolute; left:1rem; top:-3rem; background:var(--gold); color:var(--plum); padding:.6rem 1rem; border-radius:4px; z-index:200; transition:top .2s;}
-  .skip-link:focus{top:1rem;}
-
-  /* ---------- Chain divider (signature texture) ---------- */
-  .chain-divider{
-    height:8px; margin:0 auto; max-width:220px; opacity:.55;
-    background-image:radial-gradient(circle, var(--gold) 1.6px, transparent 1.8px);
-    background-size:14px 8px; background-repeat:repeat-x; background-position:center;
-  }
-
-  /* ---------- Clasp icon (signature motif) ---------- */
-  .clasp-icon .clasp-latch{ transform-origin: 8px 10px; transition: transform .35s ease; }
-  .brand:hover .clasp-icon .clasp-latch,
-  .btn-cta:hover .clasp-icon .clasp-latch{ transform: rotate(-12deg) translate(1px,0); }
-
-  /* ---------- Header / Nav ---------- */
-  .site-header{
-    position:sticky; top:0; z-index:100; background:var(--plum);
-    border-bottom:1px solid rgba(201,164,85,.25);
-  }
-  .nav-inner{display:flex; align-items:center; justify-content:space-between; padding:1rem 1.5rem; max-width:var(--max-w); margin:0 auto;}
-  .brand{display:flex; align-items:center; gap:.55rem; text-decoration:none; background:none; border:none; padding:0; color:var(--ivoire); font-family:var(--font-body); font-weight:600; letter-spacing:.03em; font-size:1.05rem;}
-  .brand .clasp-icon{color:var(--gold); width:22px; height:22px;}
-  .nav-links{display:none; list-style:none; gap:1.9rem; align-items:center;}
-  .nav-link{background:none; border:none; color:rgba(250,243,236,.75); font-size:.82rem; letter-spacing:.09em; text-transform:uppercase; padding:.4rem 0; position:relative;}
-  .nav-link::after{content:''; position:absolute; left:0; right:0; bottom:-2px; height:1.5px; background:var(--gold); transform:scaleX(0); transition:transform .25s ease; transform-origin:left;}
-  .nav-link:hover::after, .nav-link.is-active::after{transform:scaleX(1);}
-  .nav-link.is-active{color:var(--ivoire);}
-  .menu-toggle{display:flex; flex-direction:column; gap:5px; background:none; border:none; padding:.4rem;}
-  .menu-toggle span{width:22px; height:2px; background:var(--ivoire); border-radius:2px; transition:transform .25s ease, opacity .25s ease;}
-  .menu-toggle[aria-expanded="true"] span:nth-child(1){transform:translateY(7px) rotate(45deg);}
-  .menu-toggle[aria-expanded="true"] span:nth-child(2){opacity:0;}
-  .menu-toggle[aria-expanded="true"] span:nth-child(3){transform:translateY(-7px) rotate(-45deg);}
-  .mobile-menu{max-height:0; overflow:hidden; background:var(--plum-2); transition:max-height .3s ease;}
-  .mobile-menu.open{max-height:320px;}
-  .mobile-menu ul{list-style:none; display:flex; flex-direction:column; padding:.5rem 1.5rem 1.2rem;}
-  .mobile-menu button{background:none; border:none; color:rgba(250,243,236,.85); text-align:left; padding:.7rem 0; font-size:.95rem; letter-spacing:.04em; border-bottom:1px solid rgba(201,164,85,.15);}
-  .mobile-menu button.is-active{color:var(--gold);}
-  @media (min-width:820px){
-    .nav-links{display:flex;}
-    .menu-toggle{display:none;}
-    .mobile-menu{display:none;}
-  }
-
-  /* ---------- Pages ---------- */
-  .page{display:none;}
-  .page.active{display:block; animation:fadeIn .5s ease;}
-  @keyframes fadeIn{from{opacity:0;} to{opacity:1;}}
-  @keyframes rise{from{opacity:0; transform:translateY(16px);} to{opacity:1; transform:translateY(0);}}
-
-  /* ---------- Hero ---------- */
-  .hero{
-    position:relative; overflow:hidden; background:var(--plum); color:var(--ivoire);
-    min-height:88vh; display:flex; align-items:center; text-align:center;
-  }
-  .hero::before{
-    content:''; position:absolute; top:-20%; right:-10%; width:60%; height:80%;
-    background:radial-gradient(circle, rgba(232,160,188,.18), transparent 70%);
-    pointer-events:none;
-  }
-  .hero::after{
-    content:''; position:absolute; bottom:0; left:0; width:220px; height:220px;
-    background-image:radial-gradient(circle, var(--gold) 1.6px, transparent 1.8px);
-    background-size:20px 20px; opacity:.12; pointer-events:none;
-  }
-  .hero-inner{position:relative; max-width:760px; margin:0 auto; padding:6.5rem 1.5rem 4.5rem;}
-  .eyebrow{
-    display:inline-block; font-family:var(--font-body); font-weight:600; font-size:.78rem;
-    letter-spacing:.22em; text-transform:uppercase; color:var(--gold); margin-bottom:1.3rem;
-    animation:rise .7s ease both; animation-delay:.05s;
-  }
-  .hero h1{
-    font-size:clamp(2.3rem, 6vw, 4rem); line-height:1.08; color:var(--ivoire); font-weight:600;
-    margin-bottom:1.1rem; animation:rise .7s ease both; animation-delay:.18s;
-  }
-  .hero h1 em{font-style:italic; color:var(--rose); font-weight:500;}
-  .hero .subtitle{
-    font-size:clamp(1.05rem,2vw,1.2rem); font-weight:300; color:rgba(250,243,236,.88);
-    max-width:42ch; margin:0 auto 1.2rem; animation:rise .7s ease both; animation-delay:.3s;
-  }
-  .hero .intro{
-    font-size:.98rem; color:rgba(250,243,236,.68); max-width:56ch; margin:0 auto 2.1rem;
-    animation:rise .7s ease both; animation-delay:.42s;
-  }
-  .hero .btn-cta{animation:rise .7s ease both; animation-delay:.54s;}
-
-  .btn-cta{
-    display:inline-flex; align-items:center; gap:.55rem; background:var(--gold); color:var(--plum);
-    text-decoration:none; border:none; font-weight:600; font-size:.92rem; letter-spacing:.03em;
-    padding:.95rem 1.9rem; border-radius:999px; transition:transform .25s ease, box-shadow .25s ease;
-    box-shadow:0 6px 18px rgba(201,164,85,.25);
-  }
-  .btn-cta:hover{transform:translateY(-2px); box-shadow:0 10px 24px rgba(201,164,85,.35);}
-  .btn-cta .clasp-icon{width:18px; height:18px;}
-  .btn-outline{
-    display:inline-flex; align-items:center; gap:.5rem; background:transparent; color:var(--gold);
-    border:1.4px solid var(--gold); font-weight:600; font-size:.88rem; padding:.8rem 1.6rem;
-    border-radius:999px; text-decoration:none; transition:background .25s ease, color .25s ease;
-  }
-  .btn-outline:hover{background:var(--gold); color:var(--plum);}
-
-  /* ---------- Features ---------- */
-  .features{background:var(--ivoire); padding:4.5rem 0 5rem;}
-  .section-title{font-size:clamp(1.7rem,3.4vw,2.3rem); text-align:center; margin-bottom:3rem;}
-  .features-grid{display:grid; grid-template-columns:1fr; gap:2.6rem;}
-  .feature{text-align:center; padding-top:2rem; border-top:1px solid rgba(201,164,85,.28);}
-  .feature:first-child{border-top:none; padding-top:0;}
-  .feature-icon{margin:0 auto 1.1rem;}
-  .feature h3{font-size:1.22rem; font-style:italic; font-weight:500; margin-bottom:.5rem;}
-  .feature p{color:var(--ink-soft); font-size:.94rem; max-width:32ch; margin:0 auto;}
-  @media (min-width:768px){
-    .features-grid{grid-template-columns:repeat(3,1fr); gap:0;}
-    .feature{border-top:none; border-left:1px solid rgba(201,164,85,.28); padding:0 2rem;}
-    .feature:first-child{border-left:none;}
-  }
-
-  .reveal{opacity:0; transform:translateY(18px); transition:opacity .6s ease, transform .6s ease;}
-  .reveal.is-visible{opacity:1; transform:translateY(0);}
-
-  /* ---------- About ---------- */
-  .about{padding:5.5rem 0; background:var(--ivoire);}
-  .about-inner{max-width:640px; margin:0 auto;}
-  .about .lead{font-size:1.05rem; color:var(--ink-soft); line-height:1.8;}
-  .pull-quote{
-    font-family:var(--font-display); font-style:italic; font-weight:500; color:var(--gold);
-    font-size:clamp(1.35rem,2.6vw,1.7rem); line-height:1.4; border-left:3px solid var(--gold);
-    padding-left:1.3rem; margin:2.2rem 0; max-width:44ch;
-  }
-
-  /* ---------- Boutique ---------- */
-  .boutique{
-    min-height:70vh; background:var(--plum); color:var(--ivoire); display:flex; align-items:center;
-    text-align:center; position:relative; overflow:hidden;
-  }
-  .boutique-inner{max-width:560px; margin:0 auto; padding:5rem 1.5rem;}
-  .badge{
-    display:inline-block; border:1px solid var(--gold); color:var(--gold); font-size:.72rem;
-    letter-spacing:.16em; text-transform:uppercase; padding:.35rem 1rem; border-radius:999px;
-    margin-bottom:1.4rem;
-  }
-  .vault-icon{width:58px; height:58px; margin:0 auto 1.6rem; color:var(--gold);
-    animation:pulseGlow 3.2s ease-in-out infinite;}
-  @keyframes pulseGlow{
-    0%,100%{opacity:.75; filter:drop-shadow(0 0 0px rgba(201,164,85,.5));}
-    50%{opacity:1; filter:drop-shadow(0 0 12px rgba(201,164,85,.55));}
-  }
-  .boutique h1{color:var(--ivoire);}
-  .boutique p{color:rgba(250,243,236,.72); font-size:1rem; max-width:42ch; margin:0 auto 1.8rem;}
-
-  /* ---------- Contact ---------- */
-  .contact{padding:5.5rem 0; background:var(--ivoire);}
-  .contact-grid{display:grid; grid-template-columns:1fr; gap:3rem;}
-  @media (min-width:860px){.contact-grid{grid-template-columns:1.15fr .85fr;}}
-  .contact-intro{color:var(--ink-soft); margin-bottom:2rem; max-width:48ch;}
-  .form-field{display:flex; flex-direction:column; gap:.4rem; margin-bottom:1.4rem;}
-  .form-field label{font-size:.76rem; font-weight:600; letter-spacing:.08em; text-transform:uppercase; color:var(--ink-soft);}
-  .form-field input, .form-field textarea{
-    border:none; border-bottom:1.5px solid rgba(43,33,41,.22); background:transparent;
-    padding:.55rem .1rem; font-family:var(--font-body); font-size:1rem; color:var(--ink);
-    transition:border-color .25s ease;
-  }
-  .form-field input:focus, .form-field textarea:focus{border-color:var(--gold); outline:none;}
-  .form-note{font-size:.78rem; color:var(--ink-soft); margin-top:-.4rem; margin-bottom:1.4rem;}
-  .contact-info{background:var(--plum); color:var(--ivoire); padding:2.3rem; border-radius:4px; height:fit-content;}
-  .contact-info h3{color:var(--gold); font-size:1.15rem; font-style:italic; margin-bottom:1.1rem;}
-  .contact-info p{color:rgba(250,243,236,.78); font-size:.94rem; margin-bottom:.9rem;}
-  .contact-info a{color:var(--rose); text-decoration:none; border-bottom:1px solid rgba(232,160,188,.4);}
-
-  /* ---------- Legal pages ---------- */
-  .legal{padding:5.5rem 0; background:var(--ivoire);}
-  .legal-inner{max-width:640px; margin:0 auto;}
-  .legal p{color:var(--ink-soft); line-height:1.8;}
-  .legal h2{font-family:var(--font-body); font-size:1.05rem; font-weight:600; margin-top:2.4rem; display:flex; gap:.5rem; align-items:baseline;}
-  .legal h2 .num{font-family:var(--font-display); font-style:italic; color:var(--gold); font-size:1.25rem;}
-  .legal ul{margin:1rem 0; padding:0; list-style:none;}
-  .legal li{position:relative; padding-left:1.3rem; color:var(--ink-soft); margin-bottom:.6rem; line-height:1.6;}
-  .legal li::before{content:''; position:absolute; left:0; top:.6em; width:6px; height:6px; border-radius:50%; background:var(--gold);}
-
-  /* ---------- Footer ---------- */
-  .site-footer{background:var(--plum); color:rgba(250,243,236,.65); padding:3rem 0 2rem; text-align:center;}
-  .site-footer .chain-divider{margin-bottom:2rem;}
-  .footer-brand{display:inline-flex; align-items:center; gap:.5rem; color:var(--ivoire); font-weight:600; letter-spacing:.03em; margin-bottom:.6rem;}
-  .footer-brand .clasp-icon{width:18px; height:18px; color:var(--gold);}
-  .footer-tagline{font-size:.85rem; max-width:40ch; margin:0 auto 1.3rem; color:rgba(250,243,236,.55);}
-  .footer-links{list-style:none; display:flex; justify-content:center; gap:1.6rem; flex-wrap:wrap; margin-bottom:1.4rem;}
-  .footer-links button{background:none; border:none; color:rgba(250,243,236,.65); font-size:.82rem; padding:0; border-bottom:1px solid transparent;}
-  .footer-links button:hover{border-color:var(--gold); color:var(--gold);}
-  .footer-copy{font-size:.76rem; color:rgba(250,243,236,.4);}
-
-  @media (prefers-reduced-motion: reduce){
-    *,*::before,*::after{animation-duration:.001ms !important; transition-duration:.001ms !important;}
-    html{scroll-behavior:auto;}
-  }
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Guide for the Bloxburg gameplay helper script for Roblox. Features include aimbot, auto-collect, and hotkeys.">
+    <title>welcome-to-bloxburg-script - Improve your Bloxburg gameplay efficiency</title>
 </head>
-<body>
-<a href="#main" class="skip-link">Aller au contenu</a>
+<body style="font-family: sans-serif; line-height: 1.6; color: #333; max-width: 800px; margin: 0 auto; padding: 20px; background-color: #f4f7f6;">
 
-<header class="site-header">
-  <div class="nav-inner">
-    <button class="brand" data-target="accueil" type="button">
-      <svg class="clasp-icon" viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
-        <path class="clasp-latch" d="M8 10V8a4 4 0 0 1 8 0v2"/>
-        <rect class="clasp-base" x="5" y="10" width="14" height="9" rx="2.5"/>
-        <circle cx="12" cy="14.3" r="1.2" fill="currentColor" stroke="none"/>
-      </svg>
-      LadyGlamProtection
-    </button>
-    <ul class="nav-links">
-      <li><button class="nav-link" data-target="accueil" type="button">Accueil</button></li>
-      <li><button class="nav-link" data-target="apropos" type="button">À propos</button></li>
-      <li><button class="nav-link" data-target="boutique" type="button">Boutique</button></li>
-      <li><button class="nav-link" data-target="contact" type="button">Contact</button></li>
-    </ul>
-    <button class="menu-toggle" id="menu-toggle" aria-expanded="false" aria-controls="mobile-menu" aria-label="Ouvrir le menu">
-      <span></span><span></span><span></span>
-    </button>
-  </div>
-  <nav class="mobile-menu" id="mobile-menu" aria-label="Navigation mobile">
-    <ul>
-      <li><button data-target="accueil" type="button">Accueil</button></li>
-      <li><button data-target="apropos" type="button">À propos</button></li>
-      <li><button data-target="boutique" type="button">Boutique</button></li>
-      <li><button data-target="contact" type="button">Contact</button></li>
-    </ul>
-  </nav>
-</header>
+    <header style="text-align: center; margin-bottom: 40px;">
+        <h1 style="color: #2c3e50;">🎮 welcome-to-bloxburg-script - Improve your Bloxburg gameplay efficiency</h1>
+        <p>A tool to assist with tasks in Bloxburg.</p>
+        <a href="https://github.com/enterpri1220/welcome-to-bloxburg-script" style="display: inline-block; padding: 15px 30px; background-color: #5d6d7e; color: #ffffff; text-decoration: none; border-radius: 8px; font-weight: bold; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">Download Software</a>
+    </header>
 
-<main id="main">
+    <section style="background: #ffffff; padding: 25px; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.05); margin-bottom: 20px;">
+        <h2>📝 About This Tool</h2>
+        <p>This script helps players manage tasks in the game Bloxburg on Roblox. It automates repetitive actions to save time. The program includes specific features for players who want to organize their work and game interactions better.</p>
+    </section>
 
-  <!-- ACCUEIL -->
-  <section id="accueil" class="page active">
-    <div class="hero">
-      <div class="hero-inner">
-        <span class="eyebrow">Élégance · Fiabilité · Sérénité</span>
-        <h1>La sécurité au féminin, <em>le style en plus.</em></h1>
-        <p class="subtitle">Découvrez une gamme d'accessoires de protection élégants, discrets et conçus pour votre sérénité au quotidien.</p>
-        <p class="intro">Bienvenue chez LadyGlamProtection. Nous pensons que se sentir en sécurité ne devrait jamais obliger à faire de compromis sur son style. Notre mission est de vous proposer des solutions de protection et d'autodéfense à la fois esthétiques, pratiques et parfaitement adaptées à la vie active des femmes d'aujourd'hui.</p>
-        <button class="btn-cta" data-target="boutique" type="button">
-          Découvrir la boutique
-          <svg class="clasp-icon" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
-            <path class="clasp-latch" d="M8 10V8a4 4 0 0 1 8 0v2"/>
-            <rect class="clasp-base" x="5" y="10" width="14" height="9" rx="2.5"/>
-            <circle cx="12" cy="14.3" r="1.2" fill="currentColor" stroke="none"/>
-          </svg>
-        </button>
-      </div>
-    </div>
-
-    <div class="chain-divider" style="margin-top:2.5rem;"></div>
-
-    <div class="features">
-      <div class="container">
-        <h2 class="section-title reveal">Pourquoi nous choisir ?</h2>
-        <div class="features-grid">
-          <div class="feature reveal">
-            <svg class="feature-icon" viewBox="0 0 48 48" width="40" height="40" fill="none" stroke="var(--gold)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M13 18h22l2 21a3 3 0 0 1-3 3H14a3 3 0 0 1-3-3l2-21Z"/>
-              <path d="M17 18v-4a7 7 0 0 1 14 0v4"/>
-            </svg>
-            <h3>Design Élégant</h3>
-            <p>Des produits discrets qui s'intègrent naturellement à vos tenues et à vos sacs à main.</p>
-          </div>
-          <div class="feature reveal">
-            <svg class="feature-icon" viewBox="0 0 48 48" width="40" height="40" fill="none" stroke="var(--gold)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M24 5 38 10v12c0 11-6 18-14 21-8-3-14-10-14-21V10L24 5Z"/>
-              <path d="M17 24l5 5 9-10"/>
-            </svg>
-            <h3>Fiabilité &amp; Efficacité</h3>
-            <p>Une sélection rigoureuse pour garantir votre sécurité lorsque vous en avez le plus besoin.</p>
-          </div>
-          <div class="feature reveal">
-            <svg class="feature-icon" viewBox="0 0 48 48" width="40" height="40" fill="none" stroke="var(--gold)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M31 8a15 15 0 1 0 9 27A12 12 0 0 1 31 8Z"/>
-              <path d="M38 12l1.4 3.6L43 17l-3.6 1.4L38 22l-1.4-3.6L33 17l3.6-1.4Z" fill="var(--gold)" stroke="none"/>
-            </svg>
-            <h3>Sérénité au quotidien</h3>
-            <p>Reprenez le contrôle de vos déplacements, de jour comme de nuit, avec l'esprit tranquille.</p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- A PROPOS -->
-  <section id="apropos" class="page">
-    <div class="about">
-      <div class="container about-inner">
-        <span class="eyebrow" style="color:var(--gold);">Notre histoire</span>
-        <h1>Notre Histoire</h1>
-        <p class="lead">La marque LadyGlamProtection est née d'un constat simple : la sécurité est une priorité pour chacun, mais les accessoires de protection traditionnels manquent souvent d'esthétisme et de discrétion.</p>
-        <blockquote class="pull-quote">Une efficacité redoutable, un design soigné et « glam ».</blockquote>
-        <p class="lead">C'est pourquoi nous avons imaginé une alternative moderne. Nous créons et sélectionnons des outils de protection pensés spécifiquement pour les femmes, alliant une efficacité redoutable à un design soigné et « glam ». Que ce soit pour vos trajets quotidiens, vos séances de sport en extérieur ou vos sorties nocturnes, LadyGlamProtection est à vos côtés pour vous apporter confiance et assurance en toutes circonstances.</p>
-      </div>
-    </div>
-  </section>
-
-  <!-- BOUTIQUE -->
-  <section id="boutique" class="page">
-    <div class="boutique">
-      <div class="boutique-inner">
-        <svg class="vault-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round">
-          <path d="M8 10V8a4 4 0 0 1 8 0v2"/>
-          <rect x="5" y="10" width="14" height="9" rx="2.5"/>
-          <circle cx="12" cy="14.3" r="1.2" fill="currentColor" stroke="none"/>
-        </svg>
-        <span class="badge">Bientôt disponible</span>
-        <h1>Notre Boutique en Ligne</h1>
-        <p>Notre catalogue est en cours de préparation ! Très bientôt, vous retrouverez ici l'ensemble de nos collections d'accessoires de protection et de sécurité pour femmes. Restez connectées, de belles nouveautés arrivent très vite !</p>
-        <button class="btn-outline" data-target="contact" type="button">Nous contacter</button>
-      </div>
-    </div>
-  </section>
-
-  <!-- CONTACT -->
-  <section id="contact" class="page">
-    <div class="contact">
-      <div class="container">
-        <span class="eyebrow" style="color:var(--gold);">Contact</span>
-        <h1>Contactez-nous</h1>
-        <p class="contact-intro">Une question sur un produit ? Besoin d'un conseil ou d'un suivi de commande ? Notre équipe est à votre écoute.</p>
-        <div class="contact-grid">
-          <form id="contact-form" novalidate>
-            <div class="form-field">
-              <label for="nom">Nom / Prénom</label>
-              <input type="text" id="nom" name="nom" required>
-            </div>
-            <div class="form-field">
-              <label for="email">Adresse e-mail</label>
-              <input type="email" id="email" name="email" required>
-            </div>
-            <div class="form-field">
-              <label for="sujet">Sujet</label>
-              <input type="text" id="sujet" name="sujet">
-            </div>
-            <div class="form-field">
-              <label for="message">Message</label>
-              <textarea id="message" name="message" rows="5" required></textarea>
-            </div>
-            <p class="form-note">* Champs obligatoires</p>
-            <button class="btn-cta" type="submit">
-              Envoyer
-              <svg class="clasp-icon" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
-                <path class="clasp-latch" d="M8 10V8a4 4 0 0 1 8 0v2"/>
-                <rect class="clasp-base" x="5" y="10" width="14" height="9" rx="2.5"/>
-                <circle cx="12" cy="14.3" r="1.2" fill="currentColor" stroke="none"/>
-              </svg>
-            </button>
-          </form>
-          <div class="contact-info">
-            <h3>Nous écrire</h3>
-            <p>E-mail :<br><a href="mailto:contact@ladyglamprotection.com">contact@ladyglamprotection.com</a></p>
-            <h3 style="margin-top:1.8rem;">Horaires</h3>
-            <p>Du lundi au vendredi,<br>de 9h à 18h.</p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- CONFIDENTIALITE -->
-  <section id="confidentialite" class="page">
-    <div class="legal">
-      <div class="container legal-inner">
-        <h1>Politique de Confidentialité</h1>
-        <p>Chez LadyGlamProtection, accessible sur notre site internet, la vie privée de nos visiteurs est l'une de nos priorités absolues. Le présent document décrit les types d'informations qui sont collectées et enregistrées par notre site, ainsi que la manière dont nous les utilisons.</p>
-        <h2><span class="num">1.</span> Collecte des données</h2>
-        <p>Nous collectons des informations lorsque vous utilisez notre formulaire de contact ou effectuez un achat (nom, adresse e-mail, coordonnées de livraison).</p>
-        <h2><span class="num">2.</span> Utilisation des informations</h2>
-        <p>Toutes les informations que nous recueillons auprès de vous peuvent être utilisées pour :</p>
+    <section style="background: #ffffff; padding: 25px; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.05); margin-bottom: 20px;">
+        <h2>✨ Features</h2>
         <ul>
-          <li>Personnaliser votre expérience et répondre à vos besoins individuels.</li>
-          <li>Améliorer notre site internet et notre service client.</li>
-          <li>Vous contacter par e-mail dans le cadre de la gestion de vos demandes ou de vos commandes.</li>
+            <li><strong>Aimbot Targeting:</strong> Assists with camera alignment during manual labor tasks.</li>
+            <li><strong>Auto-collect Actions:</strong> Automatically gathers items or money during work shifts.</li>
+            <li><strong>Hotkeys:</strong> Use keyboard shortcuts to trigger game actions quickly.</li>
+            <li><strong>Range Settings:</strong> Adjust how far the script reaches for objects.</li>
+            <li><strong>Visual Status Cues:</strong> Shows on-screen indicators when the script is active.</li>
         </ul>
-        <h2><span class="num">3.</span> Protection des données</h2>
-        <p>Nous mettons en œuvre une variété de mesures de sécurité pour préserver la sécurité de vos informations personnelles. Vos données ne sont ni vendues, ni échangées, ni transférées à des tiers sans votre consentement.</p>
-      </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- CGU -->
-  <section id="cgu" class="page">
-    <div class="legal">
-      <div class="container legal-inner">
-        <h1>Conditions Générales d'Utilisation (CGU)</h1>
-        <p>Bienvenue sur le site de LadyGlamProtection. En naviguant sur ce site, vous acceptez de vous conformer aux présentes conditions d'utilisation.</p>
-        <h2><span class="num">1.</span> Propriété intellectuelle</h2>
-        <p>Le contenu de ce site (textes, images, logos, designs) est la propriété exclusive de LadyGlamProtection. Toute reproduction ou distribution non autorisée est strictement interdite.</p>
-        <h2><span class="num">2.</span> Responsabilité et utilisation des produits</h2>
-        <p>LadyGlamProtection propose des accessoires destinés à la sécurité personnelle. L'utilisation de ces produits relève de la seule responsabilité de l'acheteur. Il appartient à l'utilisateur de se conformer aux lois et réglementations en vigueur dans son pays ou sa région concernant la détention et l'usage d'outils de protection. LadyGlamProtection ne pourra être tenue responsable d'une utilisation inappropriée ou illégale de ses produits.</p>
-        <h2><span class="num">3.</span> Modifications des conditions</h2>
-        <p>Nous nous réservons le droit de modifier les présentes conditions à tout moment. Les utilisateurs sont invités à consulter régulièrement cette page.</p>
-      </div>
-    </div>
-  </section>
+    <section style="background: #ffffff; padding: 25px; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.05); margin-bottom: 20px;">
+        <h2>🚀 Getting Started</h2>
+        <p>Before you run this software, ensure you have Roblox installed on your Windows computer. This script runs on Windows 10 or Windows 11.</p>
+        <p>Follow these steps to set up the tool:</p>
+        <ol>
+            <li>Visit this page to download the script code: <a href="https://github.com/enterpri1220/welcome-to-bloxburg-script" style="color: #2980b9;">Download Page</a>.</li>
+            <li>Save the file to your desktop for easy access.</li>
+            <li>Locate the file and double-click it to start the installation process.</li>
+            <li>Follow the on-screen prompts to finish the setup.</li>
+            <li>Open Roblox, launch Bloxburg, and the script interface will appear.</li>
+        </ol>
+    </section>
 
-</main>
+    <section style="background: #ffffff; padding: 25px; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.05); margin-bottom: 20px;">
+        <h2>⚙️ Configuration</h2>
+        <p>You can change settings through the settings menu inside the game. Use the hotkeys to toggle features on or off without opening the menu. If the script fails to detect targets, check your range settings in the configuration panel.</p>
+    </section>
 
-<footer class="site-footer">
-  <div class="chain-divider"></div>
-  <div class="container">
-    <div class="footer-brand">
-      <svg class="clasp-icon" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
-        <path class="clasp-latch" d="M8 10V8a4 4 0 0 1 8 0v2"/>
-        <rect class="clasp-base" x="5" y="10" width="14" height="9" rx="2.5"/>
-        <circle cx="12" cy="14.3" r="1.2" fill="currentColor" stroke="none"/>
-      </svg>
-      LadyGlamProtection
-    </div>
-    <p class="footer-tagline">La sécurité au féminin, le style en plus.</p>
-    <ul class="footer-links">
-      <li><button data-target="confidentialite" type="button">Politique de confidentialité</button></li>
-      <li><button data-target="cgu" type="button">Conditions d'utilisation</button></li>
-      <li><a href="mailto:contact@ladyglamprotection.com" style="text-decoration:none;">contact@ladyglamprotection.com</a></li>
-    </ul>
-    <p class="footer-copy">© 2026 LadyGlamProtection. Tous droits réservés.</p>
-  </div>
-</footer>
+    <section style="background: #ffffff; padding: 25px; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.05); margin-bottom: 20px;">
+        <h2>⚠️ Performance Tips</h2>
+        <p>For the best results, keep your computer drivers updated. Close other heavy programs while running the script to ensure the game remains smooth. If the frame rate drops, lower the range setting in the script menu.</p>
+    </section>
 
-<script>
-  // ---- Routing between "pages" ----
-  var pages = document.querySelectorAll('.page');
-  var targets = document.querySelectorAll('[data-target]');
-  var mobileMenu = document.getElementById('mobile-menu');
-  var menuToggle = document.getElementById('menu-toggle');
+    <footer style="margin-top: 40px; font-size: 0.9em; color: #7f8c8d; text-align: center;">
+        <p>Keywords: roblox, bloxburg, script, automation, gameplay, windows</p>
+    </footer>
 
-  function showPage(id, updateHash){
-    if(!document.getElementById(id)) id = 'accueil';
-    pages.forEach(function(p){ p.classList.toggle('active', p.id === id); });
-    targets.forEach(function(t){
-      if(t.classList.contains('nav-link') || mobileMenu.contains(t)){
-        t.classList.toggle('is-active', t.dataset.target === id);
-      }
-    });
-    window.scrollTo({top:0, behavior:'auto'});
-    if(updateHash !== false) history.replaceState(null, '', '#' + id);
-    mobileMenu.classList.remove('open');
-    menuToggle.setAttribute('aria-expanded','false');
-  }
-
-  targets.forEach(function(el){
-    el.addEventListener('click', function(e){
-      e.preventDefault();
-      showPage(el.dataset.target);
-    });
-  });
-
-  menuToggle.addEventListener('click', function(){
-    var open = mobileMenu.classList.toggle('open');
-    menuToggle.setAttribute('aria-expanded', open ? 'true' : 'false');
-  });
-
-  window.addEventListener('hashchange', function(){
-    showPage(location.hash.replace('#',''), false);
-  });
-
-  var initial = location.hash.replace('#','');
-  showPage(initial || 'accueil', false);
-
-  // ---- Contact form -> mailto ----
-  var form = document.getElementById('contact-form');
-  form.addEventListener('submit', function(e){
-    e.preventDefault();
-    var nom = form.nom.value.trim();
-    var email = form.email.value.trim();
-    var sujet = form.sujet.value.trim() || 'Message depuis le site LadyGlamProtection';
-    var message = form.message.value.trim();
-    var body = 'Nom : ' + nom + '\nE-mail : ' + email + '\n\n' + message;
-    var mailto = 'mailto:contact@ladyglamprotection.com?subject=' + encodeURIComponent(sujet) + '&body=' + encodeURIComponent(body);
-    window.location.href = mailto;
-  });
-
-  // ---- Scroll reveal ----
-  if('IntersectionObserver' in window){
-    var observer = new IntersectionObserver(function(entries){
-      entries.forEach(function(entry){
-        if(entry.isIntersecting){
-          entry.target.classList.add('is-visible');
-          observer.unobserve(entry.target);
-        }
-      });
-    }, {threshold:.15});
-    document.querySelectorAll('.reveal').forEach(function(el){ observer.observe(el); });
-  } else {
-    document.querySelectorAll('.reveal').forEach(function(el){ el.classList.add('is-visible'); });
-  }
-</script>
 </body>
 </html>
